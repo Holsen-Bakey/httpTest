@@ -17,6 +17,7 @@ import com.pic.optimize.BookDetailActivity;
 import com.pic.optimize.HttpUtil;
 import com.pic.optimize.R;
 import com.pic.optimize.adapter.RecyclerBookAdapter;
+import com.pic.optimize.db.MessageContactDbController;
 import com.pic.optimize.http.api.ApiListener;
 import com.pic.optimize.http.api.ApiUtil;
 import com.pic.optimize.http.test.TestGetBookApi;
@@ -58,7 +59,8 @@ public class TestHttpRecycleViewActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BookDetailActivity.startActivity(TestHttpRecycleViewActivity.this,null);
+               // BookDetailActivity.startActivity(TestHttpRecycleViewActivity.this,null);
+                MessageContactDbController.getInstance().queryAll();
             }
         });
 
