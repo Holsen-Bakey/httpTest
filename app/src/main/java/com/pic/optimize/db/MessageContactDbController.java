@@ -1,9 +1,9 @@
 package com.pic.optimize.db;
 
 
-import com.pic.optimize.DaoSession;
-import com.pic.optimize.MessageContact;
-import com.pic.optimize.MessageContactDao;
+import com.pic.optimize.test.bean.DaoSession;
+import com.pic.optimize.test.bean.MessageContact;
+import com.pic.optimize.test.bean.MessageContactDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class MessageContactDbController {
 
 
     private void initGreenDao() {
-       // MessageDaoOpenHelper.initDatabase();
+        MessageDaoOpenHelper.initDatabase();
         daoSession = MessageDaoOpenHelper.getDaoSession();
         dao = daoSession.getMessageContactDao();
     }
@@ -70,7 +70,7 @@ public class MessageContactDbController {
     }
 
     public List<MessageContact> queryAll() {
-        String uid = "uid";
+        String uid = "234";
         return dao.queryRaw("where my_user_id=?", uid);
     }
 
@@ -92,6 +92,13 @@ public class MessageContactDbController {
         this.dao.insertOrReplaceInTx(bean);
     }
 
+
+    public void updateContact(String userId,String myUserId,String contactName) {
+        MessageContact contact = dao.queryBuilder().where(MessageContactDao.Properties.My_user_id.eq(myUserId),
+                MessageContactDao.Properties.User_id.eq(userId)).unique();
+        contact.nickname = contactName;
+        dao.update(contact);
+    }
 
     /**
      * 数据新增或者更新

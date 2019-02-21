@@ -7,9 +7,10 @@ public class CardContants {
      */
     public static final int HAVE_ANSWERED = 1;
     public static final int NOT_ANSWERED = 2;
-    public static final int ALL_QUESTION_DONE = 3;
-    public static final int NOT_WORK_ERROR = -1;
+
     public static final int CHOOSE_OPTION_ONE = 1;
     public static final int CHOOSE_OPTION_TWO = 2;
+
+    public static final String URL = "http://nick.com";
 
 }

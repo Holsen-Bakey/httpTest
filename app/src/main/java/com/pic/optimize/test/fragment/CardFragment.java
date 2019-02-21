@@ -1,6 +1,5 @@
 package com.pic.optimize.test.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,10 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pic.optimize.R;
@@ -33,15 +30,10 @@ import static com.pic.optimize.test.CardContants.CHOOSE_OPTION_TWO;
 import static com.pic.optimize.test.CardContants.HAVE_ANSWERED;
 import static com.pic.optimize.test.CardContants.NOT_ANSWERED;
 
-
-@SuppressLint("ValidFragment")
 public class CardFragment extends Fragment {
 
     private static final String TAG = "[CardFragment]";
-    private LayoutInflater mLayoutInflater;
     private View mRootView;
-
-    private View mCurrentView;
     TextView contentTv;
     TextView TipContentTv;
     ImageView first_btn_right_icon;
@@ -49,9 +41,6 @@ public class CardFragment extends Fragment {
     LinearLayout tip_layout;
     TextView optionTv1;
     TextView optionTv2;
-    LinearLayout no_network_layout;
-    RelativeLayout item_data_layout;
-    Button tip_button;
     private CardTestActivity mActivity;
     private QuestionInfo mCurrentInfo;
 
@@ -157,9 +146,6 @@ public class CardFragment extends Fragment {
         optionTv1 = (TextView) view.findViewById(R.id.first_btn);
         optionTv2 = (TextView) view.findViewById(R.id.second_btn);
         tip_layout = (LinearLayout) view.findViewById(R.id.tip_layout);
-//        no_network_layout = (LinearLayout) view.findViewById(R.id.no_network_layout);
-
-        item_data_layout = (RelativeLayout) view.findViewById(R.id.item_data_layout);
 
         first_btn_right_icon = (ImageView) view.findViewById(R.id.first_btn_right_icon);
         second_btn_right_icon = (ImageView) view.findViewById(R.id.second_btn_right_icon);
@@ -230,7 +216,6 @@ public class CardFragment extends Fragment {
                     mCurrentInfo.type = String.valueOf(HAVE_ANSWERED);
                     mCurrentInfo.total_count = mActivity.mRankInfo.total_count;
                     mCurrentInfo.correct_count = mActivity.mRankInfo.correct_count;
-                    mCurrentInfo.rank = mActivity.mRankInfo.rank;
                     mCurrentInfo.option = String.valueOf(option);
 
                     tip_layout.setVisibility(View.VISIBLE);
@@ -252,6 +237,10 @@ public class CardFragment extends Fragment {
             }
         });
 
+
+    }
+
+    private void setOptionState() {
 
     }
 

@@ -2,6 +2,7 @@ package com.pic.optimize.test.api;
 
 import com.google.gson.Gson;
 import com.pic.optimize.http.api.ApiUtil;
+import com.pic.optimize.test.CardContants;
 import com.pic.optimize.test.bean.QuestionInfo;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,7 +23,7 @@ public class HistoryQuestionGetApi extends ApiUtil {
 
     @Override
     protected String getUrl() {
-        return "http://127.0.0.1/examine/history";
+        return CardContants.URL+ "/history";
     }
 
 

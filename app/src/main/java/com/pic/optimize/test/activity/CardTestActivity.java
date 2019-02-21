@@ -12,8 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pic.optimize.R;
+import com.pic.optimize.db.MessageContactDbController;
 import com.pic.optimize.test.ITestView;
 import com.pic.optimize.test.adapter.CardFragmentPagerAdapter;
+import com.pic.optimize.test.bean.MessageContact;
 import com.pic.optimize.test.bean.QuestionInfo;
 import com.pic.optimize.test.bean.RankInfo;
 import com.pic.optimize.test.presenter.TestPresenter;
@@ -25,7 +27,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class CardTestActivity extends FragmentActivity implements View.OnClickListener,ITestView {
+public class CardTestActivity extends FragmentActivity implements View.OnClickListener, ITestView {
 
     private ImageView mBtnLeft;
     private LinearLayout mGuideView;
@@ -41,10 +43,22 @@ public class CardTestActivity extends FragmentActivity implements View.OnClickLi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.viewpaper_test_layout);
+        setContentView(R.layout.main_activity_layout);
         initView();
         mTestPresenter = new TestPresenter(this);
         mTestPresenter.getHistoryApi();
+
+        MessageContact contact = new MessageContact();
+        contact.user_id = "123";
+        contact.my_user_id = "234";
+        contact.nickname = "aa";
+        MessageContactDbController.getInstance().insert(contact);
+
+        MessageContactDbController.getInstance().queryAll();
+
+        MessageContactDbController.getInstance().updateContact("123", "234", "bb");
+
+        List<MessageContact> list = MessageContactDbController.getInstance().queryAll();
 
     }
 
@@ -64,22 +78,19 @@ public class CardTestActivity extends FragmentActivity implements View.OnClickLi
 
     private void initView() {
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mEmoticonRainView = (EmoticonRainView)findViewById(R.id.emoticon_rain_view);
-        mRankTextView1 = (TextView)findViewById(R.id.rank_text_1);
+        mEmoticonRainView = (EmoticonRainView) findViewById(R.id.emoticon_rain_view);
+        mRankTextView1 = (TextView) findViewById(R.id.rank_text_1);
         mBtnLeft = (ImageView) findViewById(R.id.btn_left);
         mBtnLeft.setOnClickListener(this);
-        mGuideView = (LinearLayout) findViewById(R.id.guide_view);
-        mGuideView.setOnClickListener(this);
     }
 
 
-
-     @Override
-     public void setAdapter(List<QuestionInfo> mHistoryList) {
+    @Override
+    public void setAdapter(List<QuestionInfo> mHistoryList) {
         Collections.reverse(mHistoryList);
         mViewPagerAdapter = new CardFragmentPagerAdapter(getSupportFragmentManager(), mHistoryList);
         mViewPager.setAdapter(mViewPagerAdapter);
-        mViewPager.setCurrentItem(mHistoryList.size()-1,false);
+        mViewPager.setCurrentItem(mHistoryList.size() - 1, false);
         mCardPageTransformer = new CardTransformer();
         //设置limit
         mViewPager.setOffscreenPageLimit(3);
@@ -127,7 +138,7 @@ public class CardTestActivity extends FragmentActivity implements View.OnClickLi
         mEmoticonRainView.start(getBitmaps());
     }
 
-    public List<Bitmap> getBitmaps(){
+    public List<Bitmap> getBitmaps() {
         List<Bitmap> bitmaps = new ArrayList<>();
         bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic1));
         bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic2));

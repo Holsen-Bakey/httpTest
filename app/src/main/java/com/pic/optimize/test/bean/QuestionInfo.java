@@ -16,10 +16,6 @@ public class QuestionInfo implements Serializable {
      */
     public String title = "";
 
-    /**
-     * 知识URL,跳转用这个
-     */
-    public String knowledge_url = "";
 
     /**
      * 题目答案（题目选项数组KEY+1）
@@ -31,17 +27,14 @@ public class QuestionInfo implements Serializable {
      */
     public String explain = "";
 
-    /**
-     * 题目排序,客户端没用
-     */
-    public String sort = "";
+
     /**
      * 今日是否答题：1-已答题、2-未答题,-1是网络异常type
      */
     public String type = "1";
 
     /**
-     * 今日是否答题：1-已答题、2-未答题,-1是网络异常type,3-完成所有题目
+     * 今日是否答题：1-已答题、2-未答题
      */
     public int card_type;
 
@@ -50,24 +43,12 @@ public class QuestionInfo implements Serializable {
      */
     public String is_correct = "";
 
-    /**
-     * 用户作答正确总数
-     */
+
     public String correct_count = "";
 
-    /**
-     * 用户答题总数（当答题总数在6题及6题以上时展示排名）
-     */
     public String total_count = "";
 
-    /**
-     * 用户排名（当答题总数在6题及6题以上时展示排名）默认为0
-     */
-    public String rank = "";
 
-    /**
-     * 题目选项,["选项A","选项B"]
-     */
     public List<String> options = new ArrayList<>();
 
     /**
