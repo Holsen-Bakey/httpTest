@@ -124,7 +124,7 @@ public abstract class ApiUtil {
     }
 
     public boolean isSuccess() {
-        return ("0".equals(mStatus)) || ("200".equals(mStatus));
+        return ("0".equals(mStatus)) || ("200".equals(mStatus) || ("success".equals(mStatus)));
     }
 
 
