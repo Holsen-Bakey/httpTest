@@ -29,13 +29,13 @@ import java.util.List;
 
 public class CardTestActivity extends FragmentActivity implements View.OnClickListener, ITestView {
 
-    private ImageView mBtnLeft;
-    private LinearLayout mGuideView;
+    public ImageView mBtnLeft;
     public RankInfo mRankInfo;
-    private TextView mRankTextView1;
-    private ViewPager mViewPager;
+    public TextView mRankTextView1;
+    public ViewPager mViewPager;
+
+
     private CardFragmentPagerAdapter mViewPagerAdapter;
-    private static final String TAG = CardTestActivity.class.getSimpleName();
     private CardTransformer mCardPageTransformer;
     public EmoticonRainView mEmoticonRainView;
     private TestPresenter mTestPresenter;
@@ -48,18 +48,14 @@ public class CardTestActivity extends FragmentActivity implements View.OnClickLi
         mTestPresenter = new TestPresenter(this);
         mTestPresenter.getHistoryApi();
 
-        MessageContact contact = new MessageContact();
-        contact.user_id = "123";
-        contact.my_user_id = "234";
-        contact.nickname = "aa";
-        MessageContactDbController.getInstance().insert(contact);
+    }
 
-        MessageContactDbController.getInstance().queryAll();
-
-        MessageContactDbController.getInstance().updateContact("123", "234", "bb");
-
-        List<MessageContact> list = MessageContactDbController.getInstance().queryAll();
-
+    private void initView() {
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mEmoticonRainView = (EmoticonRainView) findViewById(R.id.emoticon_rain_view);
+        mRankTextView1 = (TextView) findViewById(R.id.rank_text_1);
+        mBtnLeft = (ImageView) findViewById(R.id.btn_left);
+        mBtnLeft.setOnClickListener(this);
     }
 
 
@@ -75,14 +71,6 @@ public class CardTestActivity extends FragmentActivity implements View.OnClickLi
         }
     }
 
-
-    private void initView() {
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mEmoticonRainView = (EmoticonRainView) findViewById(R.id.emoticon_rain_view);
-        mRankTextView1 = (TextView) findViewById(R.id.rank_text_1);
-        mBtnLeft = (ImageView) findViewById(R.id.btn_left);
-        mBtnLeft.setOnClickListener(this);
-    }
 
 
     @Override

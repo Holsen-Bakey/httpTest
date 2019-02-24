@@ -32,15 +32,15 @@ import static com.pic.optimize.test.CardContants.NOT_ANSWERED;
 
 public class CardFragment extends Fragment {
 
-    private static final String TAG = "[CardFragment]";
-    private View mRootView;
-    TextView contentTv;
-    TextView TipContentTv;
-    ImageView first_btn_right_icon;
-    ImageView second_btn_right_icon;
-    LinearLayout tip_layout;
-    TextView optionTv1;
-    TextView optionTv2;
+    public View mRootView;
+    public TextView contentTv;
+    public TextView TipContentTv;
+    public ImageView first_btn_right_icon;
+    public ImageView second_btn_right_icon;
+    public LinearLayout tip_layout;
+    public TextView optionTv1;
+    public TextView optionTv2;
+
     private CardTestActivity mActivity;
     private QuestionInfo mCurrentInfo;
 
@@ -163,7 +163,6 @@ public class CardFragment extends Fragment {
             }
         });
 
-
     }
 
     private void saveQuestionInfo(final int option) {
@@ -237,12 +236,8 @@ public class CardFragment extends Fragment {
             }
         });
 
-
     }
 
-    private void setOptionState() {
-
-    }
 
     public List<Bitmap> getBitmaps(){
         List<Bitmap> bitmaps = new ArrayList<>();
