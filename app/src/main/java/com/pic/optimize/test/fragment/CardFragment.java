@@ -213,6 +213,7 @@ public class CardFragment extends Fragment {
                     TipContentTv.setText(mCurrentInfo.explain);
 
                     mCurrentInfo.type = HAVE_ANSWERED;
+                    mActivity.setBottomTipView(mCurrentInfo.correct_count);
 
                 }catch (Exception ex) {
                     ex.printStackTrace();
