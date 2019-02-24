@@ -2,9 +2,7 @@ package com.pic.optimize.fresco;
 
 import android.app.Application;
 import android.content.Context;
-
-import com.pic.optimize.db.MessageDaoOpenHelper;
-import com.pic.optimize.http.OkHttpUtil;
+import com.pic.optimize.http.api.OkHttpUtil;
 
 public class PicApplication extends Application{
 
@@ -14,7 +12,6 @@ public class PicApplication extends Application{
         mContext = this;
 
         OkHttpUtil.init();
-        MessageDaoOpenHelper.initDatabase();
     }
 
     public static Context mContext;

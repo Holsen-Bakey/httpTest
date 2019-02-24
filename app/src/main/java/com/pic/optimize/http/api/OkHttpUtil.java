@@ -1,12 +1,10 @@
-package com.pic.optimize.http;
+package com.pic.optimize.http.api;
 
 import com.pic.optimize.http.response.OkHttpCallback;
-
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.Call;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;

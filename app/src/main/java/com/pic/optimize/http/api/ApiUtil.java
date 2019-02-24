@@ -1,16 +1,11 @@
 package com.pic.optimize.http.api;
 
 import android.content.Context;
-
-import com.pic.optimize.http.OkHttpUtil;
 import com.pic.optimize.http.Util.Util;
 import com.pic.optimize.http.response.OkHttpCallback;
-
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.HashMap;
-
 import okhttp3.Call;
 
 

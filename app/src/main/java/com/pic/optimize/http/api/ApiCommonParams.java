@@ -1,4 +1,4 @@
-package com.pic.optimize.http;
+package com.pic.optimize.http.api;
 
 import android.content.Context;
 import android.text.TextUtils;
