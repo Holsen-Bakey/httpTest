@@ -8,19 +8,15 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pic.optimize.R;
-import com.pic.optimize.db.MessageContactDbController;
 import com.pic.optimize.test.ITestView;
 import com.pic.optimize.test.adapter.CardFragmentPagerAdapter;
-import com.pic.optimize.test.bean.MessageContact;
 import com.pic.optimize.test.bean.QuestionInfo;
 import com.pic.optimize.test.bean.RankInfo;
 import com.pic.optimize.test.presenter.TestPresenter;
 import com.pic.optimize.test.util.CardTransformer;
-import com.pic.optimize.test.view.EmoticonRainView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,7 +33,6 @@ public class CardTestActivity extends FragmentActivity implements View.OnClickLi
 
     private CardFragmentPagerAdapter mViewPagerAdapter;
     private CardTransformer mCardPageTransformer;
-    public EmoticonRainView mEmoticonRainView;
     private TestPresenter mTestPresenter;
 
     @Override
@@ -52,7 +47,6 @@ public class CardTestActivity extends FragmentActivity implements View.OnClickLi
 
     private void initView() {
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mEmoticonRainView = (EmoticonRainView) findViewById(R.id.emoticon_rain_view);
         mRankTextView1 = (TextView) findViewById(R.id.rank_text_1);
         mBtnLeft = (ImageView) findViewById(R.id.btn_left);
         mBtnLeft.setOnClickListener(this);
@@ -120,10 +114,6 @@ public class CardTestActivity extends FragmentActivity implements View.OnClickLi
                 mRankTextView1.setText(content);
             }
         }
-    }
-
-    public void startRain() {
-        mEmoticonRainView.start(getBitmaps());
     }
 
     public List<Bitmap> getBitmaps() {

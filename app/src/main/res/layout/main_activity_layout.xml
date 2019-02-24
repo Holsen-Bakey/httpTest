@@ -46,11 +46,6 @@
         android:clipChildren="false"
         />
 
-    <com.pic.optimize.test.view.EmoticonRainView
-        android:id="@+id/emoticon_rain_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
 
     <TextView
         android:id="@+id/rank_text_1"

@@ -181,7 +181,6 @@ public class CardFragment extends Fragment {
                     if (option == CHOOSE_OPTION_ONE) {
                         if (isCorrect) {
                             rightOption = 1;
-                            mActivity.startRain();
                         } else {
                             rightOption = 2;
                         }
@@ -197,7 +196,6 @@ public class CardFragment extends Fragment {
                         optionTv2.setSelected(true);
                         if (isCorrect) {
                             rightOption = 2;
-                            mActivity.startRain();
                         } else {
                             rightOption = 1;
                         }
