@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.pic.optimize.http.api.OkHttpUtil;
 
+
 public class PicApplication extends Application{
 
     @Override

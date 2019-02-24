@@ -1,8 +1,6 @@
 package com.pic.optimize.test.fragment;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,9 +19,6 @@ import com.pic.optimize.http.api.ApiUtil;
 import com.pic.optimize.test.activity.CardTestActivity;
 import com.pic.optimize.test.api.QuestionSaveApi;
 import com.pic.optimize.test.bean.QuestionInfo;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.pic.optimize.test.CardContants.CHOOSE_OPTION_ONE;
 import static com.pic.optimize.test.CardContants.CHOOSE_OPTION_TWO;
@@ -69,7 +64,7 @@ public class CardFragment extends Fragment {
             }
 
             contentTv.setText(itemData.title);
-            int type = itemData.card_type;
+            int type = itemData.type;
             int answer = 0;
             int user_option = 0;
             if (!TextUtils.isEmpty(itemData.answer)) {
@@ -209,8 +204,7 @@ public class CardFragment extends Fragment {
                     }
 
                     //如何已经答了题目，我们把当前的info设置成已答题的info
-                    mCurrentInfo.card_type = HAVE_ANSWERED;
-                    mCurrentInfo.type = String.valueOf(HAVE_ANSWERED);
+                    mCurrentInfo.type = HAVE_ANSWERED;
                     mCurrentInfo.total_count = mActivity.mRankInfo.total_count;
                     mCurrentInfo.correct_count = mActivity.mRankInfo.correct_count;
                     mCurrentInfo.option = String.valueOf(option);
@@ -218,8 +212,7 @@ public class CardFragment extends Fragment {
                     tip_layout.setVisibility(View.VISIBLE);
                     TipContentTv.setText(mCurrentInfo.explain);
 
-                    mCurrentInfo.card_type = HAVE_ANSWERED;
-                    mCurrentInfo.type = String.valueOf(HAVE_ANSWERED);
+                    mCurrentInfo.type = HAVE_ANSWERED;
 
                 }catch (Exception ex) {
                     ex.printStackTrace();
@@ -234,16 +227,6 @@ public class CardFragment extends Fragment {
             }
         });
 
-    }
-
-
-    public List<Bitmap> getBitmaps(){
-        List<Bitmap> bitmaps = new ArrayList<>();
-        bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic1));
-        bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic2));
-        bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic3));
-
-        return bitmaps;
     }
 
 

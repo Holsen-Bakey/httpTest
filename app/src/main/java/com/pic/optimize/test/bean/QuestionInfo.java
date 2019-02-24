@@ -29,14 +29,10 @@ public class QuestionInfo implements Serializable {
 
 
     /**
-     * 今日是否答题：1-已答题、2-未答题,-1是网络异常type
-     */
-    public String type = "1";
-
-    /**
      * 今日是否答题：1-已答题、2-未答题
      */
-    public int card_type;
+    public int type = 1;
+
 
     /**
      * 答题结果：0-错误、1-正确,3-完成所有题目

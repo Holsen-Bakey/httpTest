@@ -11,11 +11,6 @@ import org.json.JSONObject;
 public class GetQuestionApi extends ApiUtil {
 
     public QuestionInfo mQuestionInfo;
-    public int mStatus = 2;
-    public static final int NO_MORE_QUESTION = 0;
-    public static final int GET_NEW_QUESTION = 2;
-    public static final int HAVE_ANSWERED_QUESTION = 1;
-
 
     public GetQuestionApi(){
     }
@@ -36,9 +31,6 @@ public class GetQuestionApi extends ApiUtil {
             JSONObject dataInfo = (JSONObject) jsonObject.get("data");
             JSONObject questionInfoStr = dataInfo.optJSONObject("info");
             mQuestionInfo = new Gson().fromJson(questionInfoStr.toString(), QuestionInfo.class);
-            //今日是否答题：1-已答题、2-未答题
-            mStatus = Integer.valueOf(mQuestionInfo.type);
-            mQuestionInfo.card_type = mStatus;
         }catch (Exception ex) {
             ex.printStackTrace();
         }

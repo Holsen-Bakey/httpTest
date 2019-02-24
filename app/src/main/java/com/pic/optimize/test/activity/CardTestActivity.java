@@ -1,7 +1,5 @@
 package com.pic.optimize.test.activity;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -18,8 +16,6 @@ import com.pic.optimize.test.bean.RankInfo;
 import com.pic.optimize.test.presenter.TestPresenter;
 import com.pic.optimize.test.util.CardTransformer;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -66,37 +62,12 @@ public class CardTestActivity extends FragmentActivity implements View.OnClickLi
     }
 
 
-
     @Override
     public void setAdapter(List<QuestionInfo> mHistoryList) {
-        Collections.reverse(mHistoryList);
         mViewPagerAdapter = new CardFragmentPagerAdapter(getSupportFragmentManager(), mHistoryList);
         mViewPager.setAdapter(mViewPagerAdapter);
-        mViewPager.setCurrentItem(mHistoryList.size() - 1, false);
-        mCardPageTransformer = new CardTransformer();
         //设置limit
         mViewPager.setOffscreenPageLimit(3);
-        //设置transformer
-        mViewPager.setPageTransformer(true, mCardPageTransformer);
-
-
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float v, int i1) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int position) {
-
-            }
-        });
-
     }
 
     /**
@@ -114,15 +85,6 @@ public class CardTestActivity extends FragmentActivity implements View.OnClickLi
                 mRankTextView1.setText(content);
             }
         }
-    }
-
-    public List<Bitmap> getBitmaps() {
-        List<Bitmap> bitmaps = new ArrayList<>();
-        bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic1));
-        bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic2));
-        bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic3));
-
-        return bitmaps;
     }
 
 

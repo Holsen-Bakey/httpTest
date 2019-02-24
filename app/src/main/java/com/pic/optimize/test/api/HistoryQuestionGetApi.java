@@ -39,7 +39,6 @@ public class HistoryQuestionGetApi extends ApiUtil {
 
             for (int i=0;i<historyInfoArray.length();i++) {
                  QuestionInfo info = new Gson().fromJson(historyInfoArray.get(i).toString(), QuestionInfo.class);
-                 info.card_type = Integer.valueOf(info.type);
                  mQuestionInfoList.add(info);
             }
         }catch (Exception ex) {

@@ -15,7 +15,6 @@ import java.util.Map;
 public class CardFragmentPagerAdapter extends FragmentStatePagerAdapter {
     private Map<Integer, Fragment> classifyFragments = new HashMap<>();
     private List<QuestionInfo> classifyModels;
-    private int currentSelectedPage;
 
     public CardFragmentPagerAdapter(FragmentManager fm, List<QuestionInfo> classifyModels) {
         super(fm);

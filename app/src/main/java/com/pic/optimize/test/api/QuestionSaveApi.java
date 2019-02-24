@@ -35,10 +35,6 @@ public class QuestionSaveApi extends ApiUtil {
         }
     }
 
-    public RankInfo getRankInfo() {
-        return mRankInfo;
-    }
-
     @Override
     protected boolean isBackInMainThread() {
         return true;

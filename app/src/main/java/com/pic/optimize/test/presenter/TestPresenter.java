@@ -65,7 +65,7 @@ public class TestPresenter {
     private void refreshData() {
         mCurrentInfo = mHistoryList.get(0);
         String count = mCurrentInfo.total_count;
-        if (mCurrentInfo.card_type == HAVE_ANSWERED) {
+        if (mCurrentInfo.type == HAVE_ANSWERED) {
             mITestView.setBottomTipView(count);
         }
 
