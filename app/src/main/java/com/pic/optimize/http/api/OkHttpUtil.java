@@ -32,8 +32,6 @@ public class OkHttpUtil {
     public static void get(String url, OkHttpCallback okHttpCallback) {
         Call call = null;
         try {
-            HashMap<String,String> commonHap = ApiCommonParams.fetchCommonsParams();
-            url = getFinalUrl(url,commonHap);
             Request request =  new Request.Builder().url(url).build();
             call = mOkHttpClient.newCall(request);
             call.enqueue(okHttpCallback);

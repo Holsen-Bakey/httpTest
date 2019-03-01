@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +18,7 @@ import com.pic.optimize.http.api.ApiUtil;
 import com.pic.optimize.test.activity.CardTestActivity;
 import com.pic.optimize.test.api.QuestionSaveApi;
 import com.pic.optimize.test.bean.QuestionInfo;
+import com.pic.optimize.test.view.ButtonSelectView;
 
 import static com.pic.optimize.test.CardContants.CHOOSE_OPTION_ONE;
 import static com.pic.optimize.test.CardContants.CHOOSE_OPTION_TWO;
@@ -30,11 +30,11 @@ public class CardFragment extends Fragment {
     public View mRootView;
     public TextView contentTv;
     public TextView TipContentTv;
-    public ImageView first_btn_right_icon;
-    public ImageView second_btn_right_icon;
     public LinearLayout tip_layout;
-    public TextView optionTv1;
-    public TextView optionTv2;
+
+    private ButtonSelectView mButtonSelectView1;
+    private ButtonSelectView mButtonSelectView2;
+
 
     private CardTestActivity mActivity;
     private QuestionInfo mCurrentInfo;
@@ -67,6 +67,7 @@ public class CardFragment extends Fragment {
             int type = itemData.type;
             int answer = 0;
             int user_option = 0;
+
             if (!TextUtils.isEmpty(itemData.answer)) {
                 answer = Integer.valueOf(itemData.answer);
             }
@@ -83,34 +84,7 @@ public class CardFragment extends Fragment {
                 TipContentTv.setText(itemData.explain);
             }
 
-            if (type == HAVE_ANSWERED && answer == 1) {
-                first_btn_right_icon.setVisibility(View.VISIBLE);
-                second_btn_right_icon.setVisibility(View.VISIBLE);
-                first_btn_right_icon.setImageResource(R.drawable.img_test_right);
-                second_btn_right_icon.setImageResource(R.drawable.img_test_worn);
-            } else if (type == HAVE_ANSWERED && answer == 2) {
-                first_btn_right_icon.setVisibility(View.VISIBLE);
-                second_btn_right_icon.setVisibility(View.VISIBLE);
-                first_btn_right_icon.setImageResource(R.drawable.img_test_worn);
-                second_btn_right_icon.setImageResource(R.drawable.img_test_right);
-            }
-
-            if (type == HAVE_ANSWERED && user_option == 1) {
-                optionTv1.setSelected(true);
-                optionTv2.setSelected(false);
-            } else if (type == HAVE_ANSWERED && user_option == 2) {
-                optionTv1.setSelected(false);
-                optionTv2.setSelected(true);
-            }
-            if (type == HAVE_ANSWERED) {
-                optionTv1.setEnabled(false);
-                optionTv2.setEnabled(false);
-            }
-
-            optionTv1.setText(itemData.options.get(0));
-            optionTv2.setText(itemData.options.get(1));
-
-
+            bindButtonSelectView1(type,answer,user_option,itemData);
 
             tip_layout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -126,7 +100,6 @@ public class CardFragment extends Fragment {
     }
 
 
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -138,25 +111,27 @@ public class CardFragment extends Fragment {
     private void initView(View view) {
         contentTv = (TextView) view.findViewById(R.id.card_text);
         TipContentTv = (TextView) view.findViewById(R.id.tip_text);
-        optionTv1 = (TextView) view.findViewById(R.id.first_btn);
-        optionTv2 = (TextView) view.findViewById(R.id.second_btn);
         tip_layout = (LinearLayout) view.findViewById(R.id.tip_layout);
 
-        first_btn_right_icon = (ImageView) view.findViewById(R.id.first_btn_right_icon);
-        second_btn_right_icon = (ImageView) view.findViewById(R.id.second_btn_right_icon);
-        optionTv1.setOnClickListener(new View.OnClickListener() {
+        mButtonSelectView1 = (ButtonSelectView)view.findViewById(R.id.first_option_layout);
+        mButtonSelectView2 = (ButtonSelectView)view.findViewById(R.id.second_option_layout);
+
+        Log.d("TAG","<<<<<mButtonSelectView1="+mButtonSelectView1+"mButtonSelectView2="+mButtonSelectView2);
+
+        mButtonSelectView1.setListener(new ButtonSelectView.onButtonSelectClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onclick() {
                 saveQuestionInfo(CHOOSE_OPTION_ONE);
             }
         });
-        optionTv2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveQuestionInfo(CHOOSE_OPTION_TWO);
 
+        mButtonSelectView2.setListener(new ButtonSelectView.onButtonSelectClickListener() {
+            @Override
+            public void onclick() {
+                saveQuestionInfo(CHOOSE_OPTION_TWO);
             }
         });
+
 
     }
 
@@ -169,40 +144,10 @@ public class CardFragment extends Fragment {
                     QuestionSaveApi questionSaveApi = (QuestionSaveApi) apiBase;
                     Log.d("TAG", "<<<<<questionSaveApi=" + questionSaveApi);
                     mActivity.mRankInfo = questionSaveApi.mRankInfo;
-                    first_btn_right_icon.setVisibility(View.VISIBLE);
-                    second_btn_right_icon.setVisibility(View.VISIBLE);
                     boolean isCorrect = mActivity.mRankInfo.is_correct.equals("1");
                     int rightOption = 1;
-                    if (option == CHOOSE_OPTION_ONE) {
-                        if (isCorrect) {
-                            rightOption = 1;
-                        } else {
-                            rightOption = 2;
-                        }
-                        optionTv1.setSelected(true);
-                        optionTv2.setSelected(false);
-                        optionTv1.setEnabled(false);
-                        optionTv2.setEnabled(false);
 
-                    } else {
-                        optionTv1.setEnabled(false);
-                        optionTv2.setEnabled(false);
-                        optionTv1.setSelected(false);
-                        optionTv2.setSelected(true);
-                        if (isCorrect) {
-                            rightOption = 2;
-                        } else {
-                            rightOption = 1;
-                        }
-                    }
-                    if (rightOption == 1) {
-                        first_btn_right_icon.setImageResource(R.drawable.img_test_right);
-                        second_btn_right_icon.setImageResource(R.drawable.img_test_worn);
-                    } else {
-                        first_btn_right_icon.setImageResource(R.drawable.img_test_worn);
-                        second_btn_right_icon.setImageResource(R.drawable.img_test_right);
-                    }
-
+                    bindButtonSelectView2(option,isCorrect,rightOption);
                     //如何已经答了题目，我们把当前的info设置成已答题的info
                     mCurrentInfo.type = HAVE_ANSWERED;
                     mCurrentInfo.total_count = mActivity.mRankInfo.total_count;
@@ -223,10 +168,65 @@ public class CardFragment extends Fragment {
 
             @Override
             public void failure(ApiUtil apiBase) {
-                optionTv1.setEnabled(true);
-                optionTv2.setEnabled(true);
+                mButtonSelectView1.setEnable(true);
+                mButtonSelectView2.setEnable(true);
             }
         });
+
+    }
+
+
+    private void bindButtonSelectView1(int type,int answer,int user_option,final QuestionInfo itemData) {
+        if(type == HAVE_ANSWERED) {
+            if(answer == 1) {
+                mButtonSelectView1.setIcon(R.drawable.img_test_right);
+                mButtonSelectView2.setIcon(R.drawable.img_test_worn);
+            }else if(answer == 2) {
+                mButtonSelectView1.setIcon(R.drawable.img_test_worn);
+                mButtonSelectView2.setIcon(R.drawable.img_test_right);
+            }
+
+            if(user_option == 1) {
+                mButtonSelectView1.setSelect(true);
+                mButtonSelectView2.setSelect(false);
+            }else{
+                mButtonSelectView1.setSelect(false);
+                mButtonSelectView2.setSelect(true);
+            }
+        }
+        mButtonSelectView1.setText(itemData.options.get(0));
+        mButtonSelectView2.setText(itemData.options.get(1));
+    }
+
+
+
+    private void bindButtonSelectView2(int option,boolean isCorrect,int rightOption) {
+
+        if (option == CHOOSE_OPTION_ONE) {
+            if (isCorrect) {
+                rightOption = 1;
+            } else {
+                rightOption = 2;
+            }
+            mButtonSelectView1.setSelect(true);
+            mButtonSelectView2.setSelect(false);
+
+        } else {
+            mButtonSelectView1.setSelected(false);
+            mButtonSelectView2.setSelected(true);
+            if (isCorrect) {
+                rightOption = 2;
+            } else {
+                rightOption = 1;
+            }
+        }
+        if (rightOption == 1) {
+            mButtonSelectView1.setIcon(R.drawable.img_test_right);
+            mButtonSelectView2.setIcon(R.drawable.img_test_worn);
+        } else {
+            mButtonSelectView1.setIcon(R.drawable.img_test_worn);
+            mButtonSelectView2.setIcon(R.drawable.img_test_right);
+        }
 
     }
 

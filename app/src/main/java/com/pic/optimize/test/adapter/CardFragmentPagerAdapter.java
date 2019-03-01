@@ -34,7 +34,6 @@ public class CardFragmentPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         Fragment classifyFragment = (Fragment) super.instantiateItem(container, position);
-        classifyFragments.put(position, classifyFragment);
         return classifyFragment;
     }
 
@@ -45,7 +44,6 @@ public class CardFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        classifyFragments.remove(position);
         super.destroyItem(container, position, object);
     }
 
