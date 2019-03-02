@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.pic.optimize.R;
 import com.pic.optimize.test.ITestView;
+import com.pic.optimize.test.LoopTransformer;
 import com.pic.optimize.test.adapter.CardFragmentPagerAdapter;
 import com.pic.optimize.test.bean.QuestionInfo;
 import com.pic.optimize.test.bean.RankInfo;
@@ -68,6 +69,9 @@ public class CardTestActivity extends FragmentActivity implements View.OnClickLi
         mViewPager.setAdapter(mViewPagerAdapter);
         //设置limit
         mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setPageMargin(20);
+        mViewPager.setPageTransformer(false, new LoopTransformer());
+
     }
 
     /**
