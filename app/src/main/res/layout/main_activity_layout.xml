@@ -4,7 +4,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#FDE7F1"
-                android:clipChildren="false"
     >
 
     <RelativeLayout
@@ -43,8 +42,6 @@
         android:layout_below="@+id/title"
         android:layout_marginTop="12dp"
         android:layout_width="match_parent"
-        android:layout_margin="64dp"
-        android:overScrollMode="never"
         android:layout_height="471dp"
         android:clipChildren="false"
         />

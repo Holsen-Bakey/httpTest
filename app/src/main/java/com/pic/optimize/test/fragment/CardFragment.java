@@ -65,16 +65,13 @@ public class CardFragment extends Fragment {
 
             contentTv.setText(itemData.title);
             int type = itemData.type;
-            int answer = 0;
-            int user_option = 0;
+            int answer = Integer.valueOf(itemData.answer);
 
-            if (!TextUtils.isEmpty(itemData.answer)) {
-                answer = Integer.valueOf(itemData.answer);
-            }
-            if (!TextUtils.isEmpty(itemData.option)) {
+            int user_option = 1;
+            if(TextUtils.isEmpty(itemData.option)) {
                 user_option = Integer.valueOf(itemData.option);
             }
-
+            bindButtonSelectView1(type,answer,user_option,itemData);
             if (type == NOT_ANSWERED) {
                 //说明是答题页
                 tip_layout.setVisibility(View.GONE);
@@ -84,19 +81,32 @@ public class CardFragment extends Fragment {
                 TipContentTv.setText(itemData.explain);
             }
 
-            bindButtonSelectView1(type,answer,user_option,itemData);
-
-            tip_layout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-
         }catch (Exception ex) {
             ex.printStackTrace();
         }
 
+    }
+
+    private void bindButtonSelectView1(int type,int answer,int user_option,final QuestionInfo itemData) {
+        if(type == HAVE_ANSWERED) {
+            if(answer == 1) {
+                mButtonSelectView1.setIcon(R.drawable.img_test_right);
+                mButtonSelectView2.setIcon(R.drawable.img_test_worn);
+            }else if(answer == 2) {
+                mButtonSelectView1.setIcon(R.drawable.img_test_worn);
+                mButtonSelectView2.setIcon(R.drawable.img_test_right);
+            }
+
+            if(user_option == 1) {
+                mButtonSelectView1.setSelect(true);
+                mButtonSelectView2.setSelect(false);
+            }else{
+                mButtonSelectView1.setSelect(false);
+                mButtonSelectView2.setSelect(true);
+            }
+        }
+        mButtonSelectView1.setText(itemData.options.get(0));
+        mButtonSelectView2.setText(itemData.options.get(1));
     }
 
 
@@ -145,20 +155,13 @@ public class CardFragment extends Fragment {
                     Log.d("TAG", "<<<<<questionSaveApi=" + questionSaveApi);
                     mActivity.mRankInfo = questionSaveApi.mRankInfo;
                     boolean isCorrect = mActivity.mRankInfo.is_correct.equals("1");
-                    int rightOption = 1;
 
-                    bindButtonSelectView2(option,isCorrect,rightOption);
-                    //如何已经答了题目，我们把当前的info设置成已答题的info
-                    mCurrentInfo.type = HAVE_ANSWERED;
-                    mCurrentInfo.total_count = mActivity.mRankInfo.total_count;
-                    mCurrentInfo.correct_count = mActivity.mRankInfo.correct_count;
-                    mCurrentInfo.option = String.valueOf(option);
+                    bindButtonSelectView2(option,isCorrect);
 
                     tip_layout.setVisibility(View.VISIBLE);
                     TipContentTv.setText(mCurrentInfo.explain);
 
-                    mCurrentInfo.type = HAVE_ANSWERED;
-                    mActivity.setBottomTipView(mCurrentInfo.correct_count);
+                    mActivity.setBottomTipView(questionSaveApi.mRankInfo.correct_count);
 
                 }catch (Exception ex) {
                     ex.printStackTrace();
@@ -176,33 +179,13 @@ public class CardFragment extends Fragment {
     }
 
 
-    private void bindButtonSelectView1(int type,int answer,int user_option,final QuestionInfo itemData) {
-        if(type == HAVE_ANSWERED) {
-            if(answer == 1) {
-                mButtonSelectView1.setIcon(R.drawable.img_test_right);
-                mButtonSelectView2.setIcon(R.drawable.img_test_worn);
-            }else if(answer == 2) {
-                mButtonSelectView1.setIcon(R.drawable.img_test_worn);
-                mButtonSelectView2.setIcon(R.drawable.img_test_right);
-            }
-
-            if(user_option == 1) {
-                mButtonSelectView1.setSelect(true);
-                mButtonSelectView2.setSelect(false);
-            }else{
-                mButtonSelectView1.setSelect(false);
-                mButtonSelectView2.setSelect(true);
-            }
-        }
-        mButtonSelectView1.setText(itemData.options.get(0));
-        mButtonSelectView2.setText(itemData.options.get(1));
-    }
-
-
-
-    private void bindButtonSelectView2(int option,boolean isCorrect,int rightOption) {
-
-        if (option == CHOOSE_OPTION_ONE) {
+    /**
+     * option是用户的答案选择，isCorrect是是否正确
+     * 这个函数的逻辑是找出哪道题是正确答案，
+     */
+    private void bindButtonSelectView2(int option,boolean isCorrect) {
+        int rightOption;
+        if (option == 1) {
             if (isCorrect) {
                 rightOption = 1;
             } else {

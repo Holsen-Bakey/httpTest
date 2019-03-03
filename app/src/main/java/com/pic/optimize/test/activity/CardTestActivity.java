@@ -3,14 +3,12 @@ package com.pic.optimize.test.activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pic.optimize.R;
 import com.pic.optimize.test.ITestView;
-import com.pic.optimize.test.LoopTransformer;
 import com.pic.optimize.test.adapter.CardFragmentPagerAdapter;
 import com.pic.optimize.test.bean.QuestionInfo;
 import com.pic.optimize.test.bean.RankInfo;
@@ -69,8 +67,6 @@ public class CardTestActivity extends FragmentActivity implements View.OnClickLi
         mViewPager.setAdapter(mViewPagerAdapter);
         //设置limit
         mViewPager.setOffscreenPageLimit(3);
-        mViewPager.setPageMargin(20);
-        mViewPager.setPageTransformer(false, new LoopTransformer());
 
     }
 
@@ -79,16 +75,7 @@ public class CardTestActivity extends FragmentActivity implements View.OnClickLi
      */
     @Override
     public void setBottomTipView(String count) {
-        String content = "";
-        int totalCount = 0;
-        if (!TextUtils.isEmpty(count)) {
-            totalCount = Integer.valueOf(count);
-            if (totalCount >= 6) {
-                mRankTextView1.setVisibility(View.VISIBLE);
-                content = getString(R.string.ca_rank_info_with_correct_count, count);
-                mRankTextView1.setText(content);
-            }
-        }
+        mRankTextView1.setText("恭喜你已累计答对"+count+"题");
     }
 
 
