@@ -2,7 +2,6 @@ package com.pic.optimize.test.api;
 
 
 import com.pic.optimize.http.api.ApiUtil;
-import com.pic.optimize.test.CardContants;
 import com.pic.optimize.test.bean.RankInfo;
 
 import org.json.JSONObject;
@@ -18,11 +17,7 @@ public class QuestionSaveApi extends ApiUtil {
 
     @Override
     protected String getUrl() {
-<<<<<<< HEAD
-        return CardContants.URL+"/submit";
-=======
         return "http://nick/submit";
->>>>>>> fix bug
     }
 
     @Override

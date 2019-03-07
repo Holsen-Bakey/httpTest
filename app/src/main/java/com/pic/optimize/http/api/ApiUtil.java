@@ -119,11 +119,7 @@ public abstract class ApiUtil {
     }
 
     public boolean isSuccess() {
-<<<<<<< HEAD
-        return ("0".equals(mStatus)) || ("200".equals(mStatus) || ("success".equals(mStatus)));
-=======
         return ("success".equals(mStatus)) || ("200".equals(mStatus));
->>>>>>> fix bug
     }
 
 

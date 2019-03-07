@@ -2,7 +2,6 @@ package com.pic.optimize.test.api;
 
 import com.google.gson.Gson;
 import com.pic.optimize.http.api.ApiUtil;
-import com.pic.optimize.test.CardContants;
 import com.pic.optimize.test.bean.QuestionInfo;
 
 import org.json.JSONObject;
@@ -22,11 +21,7 @@ public class GetQuestionApi extends ApiUtil {
 
     @Override
     protected String getUrl() {
-<<<<<<< HEAD
-        return CardContants.URL+"/getQuestion";
-=======
         return "http://nick/getQuestion";
->>>>>>> fix bug
     }
 
     @Override

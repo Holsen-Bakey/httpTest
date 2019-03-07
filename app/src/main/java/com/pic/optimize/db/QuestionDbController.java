@@ -1,6 +1,6 @@
 package com.pic.optimize.db;
 
-import com.pic.optimize.DaoSession;
+import com.pic.optimize.test.bean.DaoSession;
 import com.pic.optimize.test.bean.QuestionInfo;
 import com.pic.optimize.test.bean.QuestionInfoDao;
 

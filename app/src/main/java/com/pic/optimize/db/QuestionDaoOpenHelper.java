@@ -5,8 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.pic.optimize.DaoMaster;
-import com.pic.optimize.DaoSession;
 import com.pic.optimize.fresco.PicApplication;
+import com.pic.optimize.test.bean.DaoSession;
 
 import org.greenrobot.greendao.database.Database;
 

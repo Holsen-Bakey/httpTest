@@ -40,8 +40,6 @@ public class QuestionInfo implements Serializable {
      */
     public String explain = "";
 
-<<<<<<< HEAD
-=======
     /**
      * 题目排序,客户端没用
      */
@@ -50,12 +48,7 @@ public class QuestionInfo implements Serializable {
      * 今日是否答题：1-已答题、2-未答题,-1是网络异常type
      */
     public int type = 1;
->>>>>>> fix bug
 
-    /**
-     * 今日是否答题：1-已答题、2-未答题
-     */
-    public int type = 1;
 
 
     /**
@@ -68,9 +61,6 @@ public class QuestionInfo implements Serializable {
 
     public String total_count = "";
 
-<<<<<<< HEAD
-
-=======
 
     public String rank = "";
 
@@ -83,7 +73,6 @@ public class QuestionInfo implements Serializable {
      * 题目选项,["选项A","选项B"]
      */
     @Convert(converter = StringConverter.class , columnType = String.class)
->>>>>>> fix bug
     public List<String> options = new ArrayList<>();
 
     /**
@@ -91,19 +80,17 @@ public class QuestionInfo implements Serializable {
      */
     public String option = "";
 
-    @Generated(hash = 300446597)
-    public QuestionInfo(String question_id, String title, String knowledge_url,
-            String answer, String explain, String sort, int type, int card_type,
-            String is_correct, String correct_count, String total_count,
-            String rank, int status, List<String> options, String option) {
+    @Generated(hash = 113213755)
+    public QuestionInfo(String question_id, String title, String answer,
+            String explain, String sort, int type, String is_correct,
+            String correct_count, String total_count, String rank, int status,
+            List<String> options, String option) {
         this.question_id = question_id;
         this.title = title;
-        this.knowledge_url = knowledge_url;
         this.answer = answer;
         this.explain = explain;
         this.sort = sort;
         this.type = type;
-        this.card_type = card_type;
         this.is_correct = is_correct;
         this.correct_count = correct_count;
         this.total_count = total_count;
@@ -131,14 +118,6 @@ public class QuestionInfo implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getKnowledge_url() {
-        return this.knowledge_url;
-    }
-
-    public void setKnowledge_url(String knowledge_url) {
-        this.knowledge_url = knowledge_url;
     }
 
     public String getAnswer() {
@@ -173,14 +152,6 @@ public class QuestionInfo implements Serializable {
         this.type = type;
     }
 
-    public int getCard_type() {
-        return this.card_type;
-    }
-
-    public void setCard_type(int card_type) {
-        this.card_type = card_type;
-    }
-
     public String getIs_correct() {
         return this.is_correct;
     }
@@ -213,6 +184,14 @@ public class QuestionInfo implements Serializable {
         this.rank = rank;
     }
 
+    public int getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     public List<String> getOptions() {
         return this.options;
     }
@@ -227,14 +206,6 @@ public class QuestionInfo implements Serializable {
 
     public void setOption(String option) {
         this.option = option;
-    }
-
-    public int getStatus() {
-        return this.status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
 

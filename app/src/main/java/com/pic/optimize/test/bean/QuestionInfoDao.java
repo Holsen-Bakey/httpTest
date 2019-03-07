@@ -9,8 +9,6 @@ import org.greenrobot.greendao.internal.DaoConfig;
 import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.database.DatabaseStatement;
 
-import com.pic.optimize.DaoSession;
-
 import com.pic.optimize.test.util.StringConverter;
 import java.util.List;
 
@@ -29,19 +27,17 @@ public class QuestionInfoDao extends AbstractDao<QuestionInfo, String> {
     public static class Properties {
         public final static Property Question_id = new Property(0, String.class, "question_id", true, "QUESTION_ID");
         public final static Property Title = new Property(1, String.class, "title", false, "TITLE");
-        public final static Property Knowledge_url = new Property(2, String.class, "knowledge_url", false, "KNOWLEDGE_URL");
-        public final static Property Answer = new Property(3, String.class, "answer", false, "ANSWER");
-        public final static Property Explain = new Property(4, String.class, "explain", false, "EXPLAIN");
-        public final static Property Sort = new Property(5, String.class, "sort", false, "SORT");
-        public final static Property Type = new Property(6, int.class, "type", false, "TYPE");
-        public final static Property Card_type = new Property(7, int.class, "card_type", false, "CARD_TYPE");
-        public final static Property Is_correct = new Property(8, String.class, "is_correct", false, "IS_CORRECT");
-        public final static Property Correct_count = new Property(9, String.class, "correct_count", false, "CORRECT_COUNT");
-        public final static Property Total_count = new Property(10, String.class, "total_count", false, "TOTAL_COUNT");
-        public final static Property Rank = new Property(11, String.class, "rank", false, "RANK");
-        public final static Property Status = new Property(12, int.class, "status", false, "STATUS");
-        public final static Property Options = new Property(13, String.class, "options", false, "OPTIONS");
-        public final static Property Option = new Property(14, String.class, "option", false, "OPTION");
+        public final static Property Answer = new Property(2, String.class, "answer", false, "ANSWER");
+        public final static Property Explain = new Property(3, String.class, "explain", false, "EXPLAIN");
+        public final static Property Sort = new Property(4, String.class, "sort", false, "SORT");
+        public final static Property Type = new Property(5, int.class, "type", false, "TYPE");
+        public final static Property Is_correct = new Property(6, String.class, "is_correct", false, "IS_CORRECT");
+        public final static Property Correct_count = new Property(7, String.class, "correct_count", false, "CORRECT_COUNT");
+        public final static Property Total_count = new Property(8, String.class, "total_count", false, "TOTAL_COUNT");
+        public final static Property Rank = new Property(9, String.class, "rank", false, "RANK");
+        public final static Property Status = new Property(10, int.class, "status", false, "STATUS");
+        public final static Property Options = new Property(11, String.class, "options", false, "OPTIONS");
+        public final static Property Option = new Property(12, String.class, "option", false, "OPTION");
     }
 
     private final StringConverter optionsConverter = new StringConverter();
@@ -60,19 +56,17 @@ public class QuestionInfoDao extends AbstractDao<QuestionInfo, String> {
         db.execSQL("CREATE TABLE " + constraint + "\"QuestionBean\" (" + //
                 "\"QUESTION_ID\" TEXT PRIMARY KEY NOT NULL ," + // 0: question_id
                 "\"TITLE\" TEXT," + // 1: title
-                "\"KNOWLEDGE_URL\" TEXT," + // 2: knowledge_url
-                "\"ANSWER\" TEXT," + // 3: answer
-                "\"EXPLAIN\" TEXT," + // 4: explain
-                "\"SORT\" TEXT," + // 5: sort
-                "\"TYPE\" INTEGER NOT NULL ," + // 6: type
-                "\"CARD_TYPE\" INTEGER NOT NULL ," + // 7: card_type
-                "\"IS_CORRECT\" TEXT," + // 8: is_correct
-                "\"CORRECT_COUNT\" TEXT," + // 9: correct_count
-                "\"TOTAL_COUNT\" TEXT," + // 10: total_count
-                "\"RANK\" TEXT," + // 11: rank
-                "\"STATUS\" INTEGER NOT NULL ," + // 12: status
-                "\"OPTIONS\" TEXT," + // 13: options
-                "\"OPTION\" TEXT);"); // 14: option
+                "\"ANSWER\" TEXT," + // 2: answer
+                "\"EXPLAIN\" TEXT," + // 3: explain
+                "\"SORT\" TEXT," + // 4: sort
+                "\"TYPE\" INTEGER NOT NULL ," + // 5: type
+                "\"IS_CORRECT\" TEXT," + // 6: is_correct
+                "\"CORRECT_COUNT\" TEXT," + // 7: correct_count
+                "\"TOTAL_COUNT\" TEXT," + // 8: total_count
+                "\"RANK\" TEXT," + // 9: rank
+                "\"STATUS\" INTEGER NOT NULL ," + // 10: status
+                "\"OPTIONS\" TEXT," + // 11: options
+                "\"OPTION\" TEXT);"); // 12: option
     }
 
     /** Drops the underlying database table. */
@@ -95,57 +89,51 @@ public class QuestionInfoDao extends AbstractDao<QuestionInfo, String> {
             stmt.bindString(2, title);
         }
  
-        String knowledge_url = entity.getKnowledge_url();
-        if (knowledge_url != null) {
-            stmt.bindString(3, knowledge_url);
-        }
- 
         String answer = entity.getAnswer();
         if (answer != null) {
-            stmt.bindString(4, answer);
+            stmt.bindString(3, answer);
         }
  
         String explain = entity.getExplain();
         if (explain != null) {
-            stmt.bindString(5, explain);
+            stmt.bindString(4, explain);
         }
  
         String sort = entity.getSort();
         if (sort != null) {
-            stmt.bindString(6, sort);
+            stmt.bindString(5, sort);
         }
-        stmt.bindLong(7, entity.getType());
-        stmt.bindLong(8, entity.getCard_type());
+        stmt.bindLong(6, entity.getType());
  
         String is_correct = entity.getIs_correct();
         if (is_correct != null) {
-            stmt.bindString(9, is_correct);
+            stmt.bindString(7, is_correct);
         }
  
         String correct_count = entity.getCorrect_count();
         if (correct_count != null) {
-            stmt.bindString(10, correct_count);
+            stmt.bindString(8, correct_count);
         }
  
         String total_count = entity.getTotal_count();
         if (total_count != null) {
-            stmt.bindString(11, total_count);
+            stmt.bindString(9, total_count);
         }
  
         String rank = entity.getRank();
         if (rank != null) {
-            stmt.bindString(12, rank);
+            stmt.bindString(10, rank);
         }
-        stmt.bindLong(13, entity.getStatus());
+        stmt.bindLong(11, entity.getStatus());
  
         List options = entity.getOptions();
         if (options != null) {
-            stmt.bindString(14, optionsConverter.convertToDatabaseValue(options));
+            stmt.bindString(12, optionsConverter.convertToDatabaseValue(options));
         }
  
         String option = entity.getOption();
         if (option != null) {
-            stmt.bindString(15, option);
+            stmt.bindString(13, option);
         }
     }
 
@@ -163,57 +151,51 @@ public class QuestionInfoDao extends AbstractDao<QuestionInfo, String> {
             stmt.bindString(2, title);
         }
  
-        String knowledge_url = entity.getKnowledge_url();
-        if (knowledge_url != null) {
-            stmt.bindString(3, knowledge_url);
-        }
- 
         String answer = entity.getAnswer();
         if (answer != null) {
-            stmt.bindString(4, answer);
+            stmt.bindString(3, answer);
         }
  
         String explain = entity.getExplain();
         if (explain != null) {
-            stmt.bindString(5, explain);
+            stmt.bindString(4, explain);
         }
  
         String sort = entity.getSort();
         if (sort != null) {
-            stmt.bindString(6, sort);
+            stmt.bindString(5, sort);
         }
-        stmt.bindLong(7, entity.getType());
-        stmt.bindLong(8, entity.getCard_type());
+        stmt.bindLong(6, entity.getType());
  
         String is_correct = entity.getIs_correct();
         if (is_correct != null) {
-            stmt.bindString(9, is_correct);
+            stmt.bindString(7, is_correct);
         }
  
         String correct_count = entity.getCorrect_count();
         if (correct_count != null) {
-            stmt.bindString(10, correct_count);
+            stmt.bindString(8, correct_count);
         }
  
         String total_count = entity.getTotal_count();
         if (total_count != null) {
-            stmt.bindString(11, total_count);
+            stmt.bindString(9, total_count);
         }
  
         String rank = entity.getRank();
         if (rank != null) {
-            stmt.bindString(12, rank);
+            stmt.bindString(10, rank);
         }
-        stmt.bindLong(13, entity.getStatus());
+        stmt.bindLong(11, entity.getStatus());
  
         List options = entity.getOptions();
         if (options != null) {
-            stmt.bindString(14, optionsConverter.convertToDatabaseValue(options));
+            stmt.bindString(12, optionsConverter.convertToDatabaseValue(options));
         }
  
         String option = entity.getOption();
         if (option != null) {
-            stmt.bindString(15, option);
+            stmt.bindString(13, option);
         }
     }
 
@@ -227,19 +209,17 @@ public class QuestionInfoDao extends AbstractDao<QuestionInfo, String> {
         QuestionInfo entity = new QuestionInfo( //
             cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // question_id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // title
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // knowledge_url
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // answer
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // explain
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // sort
-            cursor.getInt(offset + 6), // type
-            cursor.getInt(offset + 7), // card_type
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // is_correct
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // correct_count
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // total_count
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // rank
-            cursor.getInt(offset + 12), // status
-            cursor.isNull(offset + 13) ? null : optionsConverter.convertToEntityProperty(cursor.getString(offset + 13)), // options
-            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14) // option
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // answer
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // explain
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // sort
+            cursor.getInt(offset + 5), // type
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // is_correct
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // correct_count
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // total_count
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // rank
+            cursor.getInt(offset + 10), // status
+            cursor.isNull(offset + 11) ? null : optionsConverter.convertToEntityProperty(cursor.getString(offset + 11)), // options
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12) // option
         );
         return entity;
     }
@@ -248,19 +228,17 @@ public class QuestionInfoDao extends AbstractDao<QuestionInfo, String> {
     public void readEntity(Cursor cursor, QuestionInfo entity, int offset) {
         entity.setQuestion_id(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
         entity.setTitle(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setKnowledge_url(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setAnswer(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setExplain(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setSort(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setType(cursor.getInt(offset + 6));
-        entity.setCard_type(cursor.getInt(offset + 7));
-        entity.setIs_correct(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setCorrect_count(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setTotal_count(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setRank(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
-        entity.setStatus(cursor.getInt(offset + 12));
-        entity.setOptions(cursor.isNull(offset + 13) ? null : optionsConverter.convertToEntityProperty(cursor.getString(offset + 13)));
-        entity.setOption(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setAnswer(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setExplain(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setSort(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setType(cursor.getInt(offset + 5));
+        entity.setIs_correct(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setCorrect_count(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setTotal_count(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setRank(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setStatus(cursor.getInt(offset + 10));
+        entity.setOptions(cursor.isNull(offset + 11) ? null : optionsConverter.convertToEntityProperty(cursor.getString(offset + 11)));
+        entity.setOption(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
      }
     
     @Override

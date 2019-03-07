@@ -1,4 +1,4 @@
-package com.pic.optimize;
+package com.pic.optimize.test.bean;
 
 import java.util.Map;
 
@@ -8,11 +8,9 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
-import com.pic.optimize.MessageContact;
 import com.pic.optimize.test.bean.QuestionInfo;
 import com.pic.optimize.CardBean;
 
-import com.pic.optimize.MessageContactDao;
 import com.pic.optimize.test.bean.QuestionInfoDao;
 import com.pic.optimize.CardBeanDao;
 
@@ -25,11 +23,9 @@ import com.pic.optimize.CardBeanDao;
  */
 public class DaoSession extends AbstractDaoSession {
 
-    private final DaoConfig messageContactDaoConfig;
     private final DaoConfig questionInfoDaoConfig;
     private final DaoConfig cardBeanDaoConfig;
 
-    private final MessageContactDao messageContactDao;
     private final QuestionInfoDao questionInfoDao;
     private final CardBeanDao cardBeanDao;
 
@@ -37,32 +33,22 @@ public class DaoSession extends AbstractDaoSession {
             daoConfigMap) {
         super(db);
 
-        messageContactDaoConfig = daoConfigMap.get(MessageContactDao.class).clone();
-        messageContactDaoConfig.initIdentityScope(type);
-
         questionInfoDaoConfig = daoConfigMap.get(QuestionInfoDao.class).clone();
         questionInfoDaoConfig.initIdentityScope(type);
 
         cardBeanDaoConfig = daoConfigMap.get(CardBeanDao.class).clone();
         cardBeanDaoConfig.initIdentityScope(type);
 
-        messageContactDao = new MessageContactDao(messageContactDaoConfig, this);
         questionInfoDao = new QuestionInfoDao(questionInfoDaoConfig, this);
         cardBeanDao = new CardBeanDao(cardBeanDaoConfig, this);
 
-        registerDao(MessageContact.class, messageContactDao);
         registerDao(QuestionInfo.class, questionInfoDao);
         registerDao(CardBean.class, cardBeanDao);
     }
     
     public void clear() {
-        messageContactDaoConfig.clearIdentityScope();
         questionInfoDaoConfig.clearIdentityScope();
         cardBeanDaoConfig.clearIdentityScope();
-    }
-
-    public MessageContactDao getMessageContactDao() {
-        return messageContactDao;
     }
 
     public QuestionInfoDao getQuestionInfoDao() {

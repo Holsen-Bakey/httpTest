@@ -155,61 +155,33 @@ public class CardFragment extends Fragment {
                     Log.d("TAG", "<<<<<questionSaveApi=" + questionSaveApi);
                     mActivity.mRankInfo = questionSaveApi.mRankInfo;
                     boolean isCorrect = mActivity.mRankInfo.is_correct.equals("1");
-<<<<<<< HEAD
-
                     bindButtonSelectView2(option,isCorrect);
-=======
                     int rightOption = 1;
                     if (option == CHOOSE_OPTION_ONE) {
                         if (isCorrect) {
                             rightOption = 1;
-                            mActivity.startRain();
                         } else {
                             rightOption = 2;
                         }
-                        optionTv1.setSelected(true);
-                        optionTv2.setSelected(false);
-                        optionTv1.setEnabled(false);
-                        optionTv2.setEnabled(false);
 
                     } else {
-                        optionTv1.setEnabled(false);
-                        optionTv2.setEnabled(false);
-                        optionTv1.setSelected(false);
-                        optionTv2.setSelected(true);
                         if (isCorrect) {
                             rightOption = 2;
-                            mActivity.startRain();
                         } else {
                             rightOption = 1;
                         }
                     }
-                    if (rightOption == 1) {
-                        first_btn_right_icon.setImageResource(R.drawable.img_test_right);
-                        second_btn_right_icon.setImageResource(R.drawable.img_test_worn);
-                    } else {
-                        first_btn_right_icon.setImageResource(R.drawable.img_test_worn);
-                        second_btn_right_icon.setImageResource(R.drawable.img_test_right);
-                    }
 
                     //如何已经答了题目，我们把当前的info设置成已答题的info
-                    mCurrentInfo.card_type = HAVE_ANSWERED;
                     mCurrentInfo.type = HAVE_ANSWERED;
                     mCurrentInfo.total_count = mActivity.mRankInfo.total_count;
                     mCurrentInfo.correct_count = mActivity.mRankInfo.correct_count;
                     mCurrentInfo.rank = mActivity.mRankInfo.rank;
                     mCurrentInfo.option = String.valueOf(option);
->>>>>>> fix bug
 
                     tip_layout.setVisibility(View.VISIBLE);
                     TipContentTv.setText(mCurrentInfo.explain);
-
-<<<<<<< HEAD
                     mActivity.setBottomTipView(questionSaveApi.mRankInfo.correct_count);
-=======
-                    mCurrentInfo.card_type = HAVE_ANSWERED;
-                    mCurrentInfo.type = HAVE_ANSWERED;
->>>>>>> fix bug
 
                 }catch (Exception ex) {
                     ex.printStackTrace();
