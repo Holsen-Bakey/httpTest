@@ -23,7 +23,11 @@ public class HistoryQuestionGetApi extends ApiUtil {
 
     @Override
     protected String getUrl() {
+<<<<<<< HEAD
         return CardContants.URL+ "/history";
+=======
+        return "http://nick/history";
+>>>>>>> fix bug
     }
 
 
@@ -39,6 +43,10 @@ public class HistoryQuestionGetApi extends ApiUtil {
 
             for (int i=0;i<historyInfoArray.length();i++) {
                  QuestionInfo info = new Gson().fromJson(historyInfoArray.get(i).toString(), QuestionInfo.class);
+<<<<<<< HEAD
+=======
+                 info.card_type = info.type;
+>>>>>>> fix bug
                  mQuestionInfoList.add(info);
             }
         }catch (Exception ex) {

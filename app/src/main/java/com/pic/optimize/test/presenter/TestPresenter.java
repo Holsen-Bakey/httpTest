@@ -3,6 +3,7 @@ package com.pic.optimize.test.presenter;
 import android.app.Activity;
 import android.content.Context;
 
+import com.pic.optimize.db.QuestionDbController;
 import com.pic.optimize.http.api.ApiListener;
 import com.pic.optimize.http.api.ApiUtil;
 import com.pic.optimize.test.ITestView;
@@ -30,6 +31,10 @@ public class TestPresenter {
         this.mContext = activity;
     }
 
+    public void getDataFromLocal() {
+        refreshData();
+    }
+
     public void getHistoryApi() {
         new HistoryQuestionGetApi(mPage).get(mContext,new ApiListener() {
             @Override
@@ -53,6 +58,7 @@ public class TestPresenter {
                 GetQuestionApi api = (GetQuestionApi) apiBase;
                 mTodayQuestionInfo = api.mQuestionInfo;
                 mHistoryList.add(0, mTodayQuestionInfo);
+                handleDataBase();
                 refreshData();
             }
 
@@ -63,6 +69,8 @@ public class TestPresenter {
     }
 
     private void refreshData() {
+
+        mHistoryList = QuestionDbController.getInstance().queryAll();
         mCurrentInfo = mHistoryList.get(0);
         String count = mCurrentInfo.total_count;
         if (mCurrentInfo.type == HAVE_ANSWERED) {
@@ -72,4 +80,23 @@ public class TestPresenter {
         mITestView.setAdapter(mHistoryList);
     }
 
+
+    private void handleDataBase() {
+        List<QuestionInfo> deleteList = new ArrayList<>();
+        ArrayList<QuestionInfo> paperList = new ArrayList();
+
+        for (int i=0;i<mHistoryList.size();i++) {
+            QuestionInfo info = mHistoryList.get(i);
+            int status = info.status;
+            if(status == -1) {
+                deleteList.add(info);
+            }else if(status == 0){
+                paperList.add(info);
+            }
+        }
+
+
+        QuestionDbController.getInstance().delete(deleteList);
+        QuestionDbController.getInstance().insertOrReplace(paperList);
+    }
 }

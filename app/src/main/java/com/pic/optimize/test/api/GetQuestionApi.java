@@ -22,7 +22,11 @@ public class GetQuestionApi extends ApiUtil {
 
     @Override
     protected String getUrl() {
+<<<<<<< HEAD
         return CardContants.URL+"/getQuestion";
+=======
+        return "http://nick/getQuestion";
+>>>>>>> fix bug
     }
 
     @Override

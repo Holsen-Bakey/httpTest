@@ -18,7 +18,11 @@ public class QuestionSaveApi extends ApiUtil {
 
     @Override
     protected String getUrl() {
+<<<<<<< HEAD
         return CardContants.URL+"/submit";
+=======
+        return "http://nick/submit";
+>>>>>>> fix bug
     }
 
     @Override
