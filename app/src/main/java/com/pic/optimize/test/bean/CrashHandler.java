@@ -83,6 +83,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler{
             String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(currenttime));
 
             File exfile = new File(PATH +File.separator+FILE_NAME+time + FILE_NAME_SUFEIX);
+
             PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(exfile)));
             Log.e("错误日志文件路径",""+exfile.getAbsolutePath());
             pw.println(time);
@@ -96,9 +97,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler{
             pw.println("Vendor:" + Build.MANUFACTURER);
             //手机型号
             pw.println("Model:" + Build.MODEL);
-            //CPU架构
-            pw.println("CPU ABI:" + Build.CPU_ABI);
-
+            //打印堆栈
             ex.printStackTrace(pw);
             pw.close();
         }
